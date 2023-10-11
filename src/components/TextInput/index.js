@@ -3,13 +3,14 @@ import React from 'react'
 import { responsiveHeight, responsiveScreenWidth, responsiveWidth } from 'react-native-responsive-dimensions';
 
 export default function TextInputComponent(props) {
-    const {placeholder,onChangeText,value} = props;
+    const {placeholder,onChangeText,value,secureText} = props;
   return (
     <View style={styles.container}>
       <TextInput
       value={value}
       placeholder={placeholder}
       style={styles.text}
+      secureTextEntry={secureText}
       onChangeText={onChangeText}/>
     </View>
   )
