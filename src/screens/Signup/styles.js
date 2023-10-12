@@ -10,7 +10,7 @@ signUpText:{fontSize:responsiveFontSize(5),color:colors.black},
 headerView:{
 alignItems:"center",marginVertical:responsiveHeight(6)
 },
-bottomText:{alignItems:"center",marginVertical:responsiveHeight(3),flexDirection:'row',marginHorizontal:responsiveWidth(27)}
+bottomText:{alignItems:"center",marginVertical:responsiveHeight(2),flexDirection:'row',marginHorizontal:responsiveWidth(27)}
 })
 
 export default styles;

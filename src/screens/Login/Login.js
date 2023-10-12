@@ -37,7 +37,7 @@ const Login = ({navigation}) => {
       <View style={{marginVertical:responsiveHeight(6)}}>
       <Button
       onPress={()=>logIn()}
-      btnStyle={{width:responsiveWidth(80),marginHorizontal:responsiveWidth(-17)}}
+      btnStyle={{width:responsiveWidth(80),marginHorizontal:responsiveWidth(-2)}}
       name="Log In"/>
       </View>
     </SafeAreaView>
