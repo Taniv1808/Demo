@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { Login, Signup } from "../screens";
+import { Home, Login, Signup } from "../screens";
 import navigationStrings from "../constants/navigationStrings";
 
 const Stack =  createNativeStackNavigator();
@@ -17,6 +17,10 @@ export default function Navigation(){
                 <Stack.Screen
                 name={navigationStrings.LOGIN}
                 component={Login}
+                />
+                <Stack.Screen
+                name={navigationStrings.HOME}
+                component={Home}
                 />
                 
             </Stack.Navigator>
