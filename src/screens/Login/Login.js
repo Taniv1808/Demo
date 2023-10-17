@@ -1,38 +1,19 @@
-import { View, Text, SafeAreaView, Alert } from 'react-native'
+import { View, Text, SafeAreaView, Alert, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import styles from './styles'
 import TextInputComponent from '../../components/TextInput'
-import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions'
+import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions'
 import Button from '../../components/Button'
 import navigationStrings from '../../constants/navigationStrings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import colors from '../../constants/colors'
 
 const Login = ({navigation}) => {
   const [loginEmail, setloginEmail] = useState("")
   const [loginPassword, setloginPassword] = useState("")
-
-   const logIn=async()=>{
-    try {
-      if(loginPassword=="" || loginEmail==""){
-        Alert.alert("Both fields are required")
-      }
-      await AsyncStorage.getItem('User')
-      .then(value=>{
-        let user = JSON.parse(value)
-        console.log(user.email,user.password);
-        if(loginEmail!=user.email || loginPassword!=user.password){
-          Alert.alert("Email or password Does not exist")
-        }
-        else{
-          navigation.navigate(navigationStrings.HOME)
-        }
-      })
-      
-    } catch (error) {
-      console.log(error,"error"); 
-    }
-    
-   }
+const logIn=()=>{
+  navigation.navigate(navigationStrings.HOME)
+}
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerView}>
@@ -48,6 +29,12 @@ const Login = ({navigation}) => {
         placeholder="Password"
         secureText={true}
         onChangeText={(text)=>setloginPassword(text)}/>
+      </View>
+      <View style={styles.bottomText}>
+        <Text>Already a member ? </Text>
+        <TouchableOpacity onPress={()=>navigation.navigate(navigationStrings.SIGNUP)}>
+        <Text style={{color:colors.black,fontSize:responsiveFontSize(2),fontWeight:"700"}}>Sign Up</Text>
+        </TouchableOpacity>
       </View>
       <View style={{marginVertical:responsiveHeight(6)}}>
       <Button

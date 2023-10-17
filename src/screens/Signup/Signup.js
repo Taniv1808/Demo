@@ -7,6 +7,9 @@ import Button from '../../components/Button'
 import colors from '../../constants/colors'
 import navigationStrings from '../../constants/navigationStrings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useSelector } from 'react-redux'
+import { confirmPasswordAuthentication, emailAuthentication, nameAuthentication, passwordAuthentication } from '../../redux/actions/authAction'
+
 
 const Signup = ({navigation}) => {
    const [firstName, setfirstName] = useState("")
@@ -14,21 +17,9 @@ const Signup = ({navigation}) => {
    const [password, setpassword] = useState("")
    const [confirmPassword, setConfirmPassword] = useState("")
 
-   useEffect(()=>{
-    getUser()
-        },[])
-        const getUser=async()=>{
-            try {
-                await AsyncStorage.getItem('User')
-                .then(value=>{
-                    if(value!=null){
-                        navigation.navigate(navigationStrings.HOME)
-                    }
-                })
-            } catch (error) {
-                console.log(error,"error");
-            }
-        }
+   const allReducer=useSelector(state=>state.auth)
+
+   console.log(allReducer,"allReducer");
 
    const signUp=async()=>{
     if(firstName=="" || email==""|| password==""|| confirmPassword==""){
@@ -38,18 +29,24 @@ const Signup = ({navigation}) => {
       Alert.alert('Password and Confirm Password not matched')
     } 
     else{
-     try {
-     var user={
-      name:firstName,
-      email:email,
-      password:password,
-      confirmPassword:confirmPassword
-     }
-     await AsyncStorage.setItem('User',JSON.stringify(user))
+      try {
+        let userData={
+          email:email,
+          name:firstName,
+          password:password,
+          confirmPassword:confirmPassword
+        }
+        await AsyncStorage.setItem("User",JSON.stringify(userData))
+        emailAuthentication(email)
+    passwordAuthentication(password)
+    nameAuthentication(firstName)
+    confirmPasswordAuthentication(confirmPassword)
+
      navigation.navigate(navigationStrings.LOGIN)
-     } catch (error) {
-      console.log(error,"errorS");
-     }
+      } catch (error) {
+        console.log(error,"error");
+      }
+    
     }
    }
   return (
